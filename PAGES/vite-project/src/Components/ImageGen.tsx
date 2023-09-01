@@ -13,6 +13,7 @@ function ImageGen() {
   return (
     <div>
       <MNavbar username={username} />
+      <p className="text-black text-2xl mb-5 ml-5 font-bold">GeneralizeTitle</p>
       <Grid margin={"auto"}>
         <ul>
             <li> <Discription img={image[0]} /> </li>

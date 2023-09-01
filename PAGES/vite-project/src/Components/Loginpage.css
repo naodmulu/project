@@ -1,0 +1,72 @@
+.App {
+    text-align: center;
+    display: flex;
+    min-height: 100vh;
+    align-items: right;
+    justify-content: right;
+   background-image: url(./2.jpg);
+   background-size: cover ;
+  }
+  .auth-form-container, .login-form, .register-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  }
+  .form-container{
+    padding:0px;
+    margin:2px;
+    border-color: black;
+  }
+ 
+
+ 
+  button {
+    border: black;
+    background-color: rgb(31, 143, 235);
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: red;
+    padding: 10px;
+    margin: 1rem 0;
+    border-radius: 100px;
+    width: 200px;
+    height: 45px;
+  
+  }
+  .link-btn{
+    background: none;
+    color:black;
+    text-align: center;
+  }
+  .link-btn2{
+    background: none;
+    color:gray;
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+  }
+  .link-btn2{
+    background: none;
+    color:gray;
+    text-align: center;
+    font-weight: 300;
+    font-size: 15px;
+  }
+
+  
+  .auth-form-container{
+    background-color: (194, 199, 199);
+  }
+  
+  ::placeholder {
+    font-family: 'Font Awesome Free', black; 
+    font-size: 13px;
+    font-weight: 600; 
+    color: blank;
+    padding: 10px;
+  }

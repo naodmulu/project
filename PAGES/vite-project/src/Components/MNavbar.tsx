@@ -31,7 +31,7 @@ export const MNavbar = (props) => {
 
   const navigate = useNavigate();
   const handleHomeButton = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   // username recieved from app.tsx

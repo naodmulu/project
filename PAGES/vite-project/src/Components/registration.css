@@ -12,12 +12,8 @@ h2 {
   font-weight: lighter;
   margin-bottom: 15px;
 }
-input {
-  border-radius: 20px;
-  border: none;
-  position: relative;
-  margin-bottom: 15px;
-}
+
+
 /* .icon {
   color: red;
   margin: 2em;

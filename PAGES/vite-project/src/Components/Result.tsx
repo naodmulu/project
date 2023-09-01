@@ -4,6 +4,7 @@ import MNavbar from "./MNavbar";
 import GeneratedText from "./GeneratedText";
 import VideoPlayer from "./VideoPlayer";
 import React from "react";
+import ImageGen from "./ImageGen";
 function Result() {
 
     const videoUrls = [
@@ -22,8 +23,9 @@ function Result() {
         <div className="flex">
          <VideoPlayer videoUrls={videoUrls} />
         </div>
+        
         <div className="items-center">
-         <GeneratedText text={explain} />
+         <ImageGen />
         </div>
       </div>
     </>

@@ -1,12 +1,19 @@
-import React from "react";
 import "./registration.css";
+import { Button } from "flowbite-react";
 import { HiOutlineMail, HiUser, HiPhone, HiLockClosed } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+import React from "react";
 
-const Registration = () =>{
+export default function MyPage() {
+  const navgate = useNavigate();
+  const gate = () => {
+    navgate("/");
+  };
+  
   return (
     <div className="flex">
       <div
-        className="w-8 leftdiv"
+        className="main"
         style={{
           background: "#1363DF",
           width: "65%",
@@ -21,7 +28,7 @@ const Registration = () =>{
 
         <form className="">
           <label
-            htmlFor="email-address-icon"
+            
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             First Name
@@ -31,21 +38,15 @@ const Registration = () =>{
               <HiUser />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
+              
               type="text"
-              id="email-address-icon"
+            
               className="bg-gray-50 border border-gray-100 text-gray-900 text-md rounded-lg focus:ring-blue-50 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-100 dark:placeholder-gray-200 dark:text-gray dark:focus:ring-blue-200 dark:focus:border-blue-200 borderRadius: 20"
               placeholder="First Name"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
+            
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Last Name
@@ -55,21 +56,13 @@ const Registration = () =>{
               <HiUser className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
+              
               type="text"
-              id="email-address-icon"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Last Name"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Username
@@ -79,15 +72,8 @@ const Registration = () =>{
               <HiUser className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
+              
               type="text"
-              id="username"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Username"
             />
@@ -103,13 +89,7 @@ const Registration = () =>{
               <HiOutlineMail className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
+              
               type="text"
               id="email-address-icon"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -118,7 +98,6 @@ const Registration = () =>{
           </div>
 
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Phone Number
@@ -128,21 +107,13 @@ const Registration = () =>{
               <HiPhone className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="number"
-              id="phone"
+              
+              type="text"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Phone Number"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             New Password
@@ -152,21 +123,13 @@ const Registration = () =>{
               <HiLockClosed className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="text"
-              id="email-address-icon"
+              
+              type="password"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="New Password"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Confirm Password
@@ -176,25 +139,12 @@ const Registration = () =>{
               <HiLockClosed className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="text"
-              id="email-address-icon"
+              
+              type="password"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Confirm Password"
             />
           </div>
-          <label
-            htmlFor="email-address-icon"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Confirm Password
-          </label>
           <div className="flex items-center mb-4">
             <input
               id="default-checkbox"
@@ -210,7 +160,6 @@ const Registration = () =>{
             </label>
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Confirm Password
@@ -225,14 +174,16 @@ const Registration = () =>{
               borderBlockColor: "white",
             }}
             type="button"
+            onClick={gate}
             className="py-2.5 px-5 mr-2 mb-2 text-lg font-large font-semibold font-Arial text-white-900 focus:outline-white bg-white rounded-lg border border-gray-100 hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-100 dark:bg-blue-100 dark:text-blue-100 dark:border-blue-100 dark:hover:text-white dark:hover:bg-gray-700"
           >
             Register
           </button>
         </div>
+        <p className="text-sm font-light p-4">
+                      Already have an account? <span onClick={gate} className=" text-blue-500 font-medium hover:underline cursor-pointer">Login here</span>
+                  </p>
       </div>
     </div>
   );
-};
-
-export default Registration;
+}
