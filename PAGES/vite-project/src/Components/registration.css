@@ -1,0 +1,42 @@
+h1 {
+  color: #272829;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: xx-large;
+  font-weight: bolder;
+  margin-bottom: 15px;
+}
+h2 {
+  color: #272829;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: lighter;
+  margin-bottom: 15px;
+}
+input {
+  border-radius: 20px;
+  border: none;
+  position: relative;
+  margin-bottom: 15px;
+}
+/* .icon {
+  color: red;
+  margin: 2em;
+} */
+.form {
+  width: 25%;
+  padding-top: 5%;
+  padding-right: 5%;
+}
+.leftdiv {
+  position: relative;
+  width: 65%;
+}
+.body {
+}
+.leftImage {
+  position: absolute;
+  width: 90%;
+}
+button {
+  color: white;
+}
