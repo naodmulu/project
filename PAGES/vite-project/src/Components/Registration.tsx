@@ -1,16 +1,69 @@
-import React from "react";
 import "./registration.css";
+import { Button } from "flowbite-react";
 import { HiOutlineMail, HiUser, HiPhone, HiLockClosed } from "react-icons/hi";
+import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useState } from "react";
 
-const Registration = () =>{
+export default function MyPage() {
+  const navgate = useNavigate();
+
+  const gate = () => {
+    navgate("/");
+  };
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    username: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+    agreedToTerms: false,
+  });
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords don't match!");
+      return;
+    }
+    const registerData = JSON.stringify(formData);
+    console.log(registerData);
+
+    fetch("http://127.0.0.1:5000/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: registerData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Registration successful!", data);
+        navgate("/");
+      })
+      .catch((error) => {
+        console.error("Error re:", error);
+      });
+  };
+  
   return (
     <div className="flex">
       <div
-        className="w-8 leftdiv"
+        className="main"
         style={{
           background: "#1363DF",
           width: "65%",
-          height: 1000,
+          height: "120vh",
           marginRight: 100,
         }}
       >
@@ -19,33 +72,29 @@ const Registration = () =>{
         <h1>Hello!</h1>
         <h2>Sign Up to Get Started</h2>
 
-        <form className="">
+        <form onSubmit={handleSubmit} className="">
           <label
-            htmlFor="email-address-icon"
+            
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             First Name
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-              <HiUser />
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5  pointer-events-none">
+              <HiUser className = "icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
               type="text"
-              id="email-address-icon"
-              className="bg-gray-50 border border-gray-100 text-gray-900 text-md rounded-lg focus:ring-blue-50 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-100 dark:placeholder-gray-200 dark:text-gray dark:focus:ring-blue-200 dark:focus:border-blue-200 borderRadius: 20"
+              id="first-name"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleChange}       
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="First Name"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
+            
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Last Name
@@ -55,21 +104,16 @@ const Registration = () =>{
               <HiUser className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
               type="text"
-              id="email-address-icon"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              id="last-name"
               placeholder="Last Name"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Username
@@ -79,17 +123,13 @@ const Registration = () =>{
               <HiUser className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
               type="text"
               id="username"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Username"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
           <label
@@ -103,22 +143,17 @@ const Registration = () =>{
               <HiOutlineMail className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="text"
-              id="email-address-icon"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="email"
+              id="email-address"
               placeholder="Email Address"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
 
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Phone Number
@@ -128,21 +163,16 @@ const Registration = () =>{
               <HiPhone className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="number"
+              type="phone"
               id="phone"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="Phone Number"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             New Password
@@ -152,21 +182,16 @@ const Registration = () =>{
               <HiLockClosed className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="text"
-              id="email-address-icon"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              type="password"
+              id="new-password"
               placeholder="New Password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
           <label
-            htmlFor="email-address-icon"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Confirm Password
@@ -176,31 +201,21 @@ const Registration = () =>{
               <HiLockClosed className="icon" />
             </div>
             <input
-              style={{
-                height: 40,
-                width: "95%",
-                borderColor: "white-gray-100",
-                borderWidth: 1,
-                borderRadius: 20,
-              }}
-              type="text"
-              id="email-address-icon"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Confirm Password"
+                type="password"
+                id="confirm-password"
+                placeholder="Confirm Password"
+                name="confirmPassword"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
             />
           </div>
-          <label
-            htmlFor="email-address-icon"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Confirm Password
-          </label>
           <div className="flex items-center mb-4">
             <input
               id="default-checkbox"
               type="checkbox"
               value=""
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded full mb-1 cus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
             />
             <label
               htmlFor="default-checkbox"
@@ -209,30 +224,27 @@ const Registration = () =>{
               I agree to the terms and conditions that apply!
             </label>
           </div>
-          <label
-            htmlFor="email-address-icon"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Confirm Password
-          </label>
-        </form>
-        <div className="button">
-          <button
+          <div className="button ">
+        <button
             style={{
               borderRadius: 40,
               width: "95%",
-              background: "#1363DF",
+              background: "#0bacc5",
               borderBlockColor: "white",
             }}
-            type="button"
+            type="submit"
             className="py-2.5 px-5 mr-2 mb-2 text-lg font-large font-semibold font-Arial text-white-900 focus:outline-white bg-white rounded-lg border border-gray-100 hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-100 dark:bg-blue-100 dark:text-blue-100 dark:border-blue-100 dark:hover:text-white dark:hover:bg-gray-700"
           >
             Register
           </button>
         </div>
+          
+        </form>
+        
+        <p className="text-sm font-light p-4">
+                      Already have an account? <span onClick={gate} className=" text-blue-500 font-medium hover:underline cursor-pointer">Login here</span>
+                  </p>
       </div>
     </div>
   );
-};
-
-export default Registration;
+}

@@ -12,16 +12,12 @@ h2 {
   font-weight: lighter;
   margin-bottom: 15px;
 }
-input {
-  border-radius: 20px;
-  border: none;
-  position: relative;
-  margin-bottom: 15px;
+
+
+.icon {
+  color: #0bacc5;
+  margin: 1em;
 }
-/* .icon {
-  color: red;
-  margin: 2em;
-} */
 .form {
   width: 25%;
   padding-top: 5%;
@@ -31,12 +27,13 @@ input {
   position: relative;
   width: 65%;
 }
-.body {
-}
+
 .leftImage {
   position: absolute;
   width: 90%;
 }
-button {
+.button {
   color: white;
+  margin-left: 5%;
+
 }

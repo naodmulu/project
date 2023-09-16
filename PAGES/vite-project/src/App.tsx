@@ -4,16 +4,16 @@ import React from "react";
 import Result from "./components/Result";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./Components/HomePage";
-import ImageGen from "./Components/ImageGen";
 import Registration from "./Components/Registration";
+import { Loginpage } from "./Components/Loginpage";
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/result" element={<Result />} />
-        <Route path="/imageGen" element={<ImageGen />} />
-        <Route path="/" element={<Registration />} />
+        <Route path="/" element={<Loginpage />} />
+        <Route path="/register" element={<Registration />} />
       </Routes>
     </div>
   );
