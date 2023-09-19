@@ -49,10 +49,17 @@ export default function MyPage() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Registration successful!", data);
-        navgate("/");
+        if (data.status === 201) {
+          alert("Registration successful!");
+          navgate("/");
+        }
+        alert(data.message || "Registration");
+        
       })
       .catch((error) => {
-        console.error("Error re:", error);
+        console.error("Error:", error);
+        // print message to user from backend
+       alert(data.message || "An error occurred!");
       });
   };
   
@@ -91,6 +98,7 @@ export default function MyPage() {
               onChange={handleChange}       
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="First Name"
+              required
             />
           </div>
           <label
@@ -111,6 +119,7 @@ export default function MyPage() {
               value={formData.lastName}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
             />
           </div>
           <label
@@ -130,6 +139,7 @@ export default function MyPage() {
               value={formData.username}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required            
             />
           </div>
           <label
@@ -150,6 +160,7 @@ export default function MyPage() {
               value={formData.email}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
             />
           </div>
 
@@ -170,6 +181,7 @@ export default function MyPage() {
               value={formData.phone}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
             />
           </div>
           <label
@@ -189,6 +201,7 @@ export default function MyPage() {
               value={formData.password}
               onChange={handleChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              required
             />
           </div>
           <label
@@ -208,7 +221,8 @@ export default function MyPage() {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            />
+              
+                required/>
           </div>
           <div className="flex items-center mb-4">
             <input
