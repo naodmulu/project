@@ -14,10 +14,17 @@ h2 {
 }
 
 
+<<<<<<< HEAD
 /* .icon {
   color: red;
   margin: 2em;
 } */
+=======
+.icon {
+  color: #0bacc5;
+  margin: 1em;
+}
+>>>>>>> effbf0a97987006817d380b5cafd8b759893d4f8
 .form {
   width: 25%;
   padding-top: 5%;
@@ -27,12 +34,13 @@ h2 {
   position: relative;
   width: 65%;
 }
-.body {
-}
+
 .leftImage {
   position: absolute;
   width: 90%;
 }
-button {
+.button {
   color: white;
+  margin-left: 5%;
+
 }
