@@ -1,39 +1,44 @@
-
-import "../App.css";
+import React, { useState, useEffect } from "react";
 import MNavbar from "./MNavbar";
 import GeneratedText from "./GeneratedText";
 import VideoPlayer from "./VideoPlayer";
-import React from "react";
 import ImageGen from "./ImageGen";
+
 function Result() {
+  const [videoUrls, setVideoUrls] = useState([]);
+  const [explain, setExplain] = useState("This is the generated outcome");
+  const [username, setUsername] = useState("UserName");
 
-    const videoUrls = [
-        "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
-        "https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4",
-      ];
+  useEffect(() => {
+    // Define the URL of your backend endpoint
+    const apiUrl = "http://127.0.0.1:5000/V";
 
-    const explain = "This is the generated outcome"
-
-  const username = "UserName";
+    // Fetch video URLs from the backend
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        // Assuming the data from the backend is in the format { videoUrls: [...] }
+        setVideoUrls(data.videoUrls);
+      })
+      .catch((error) => {
+        console.error("Error fetching video URLs:", error);
+      });
+  }, []);
 
   return (
     <>
-        <MNavbar username={username}/>
+      <MNavbar username={username} />
       <div className="text-black body_Center">
         <div className="flex">
-         <VideoPlayer videoUrls={videoUrls} />
+          <VideoPlayer videoUrls={videoUrls} />
         </div>
-        
+
         <div className="items-center">
-         <ImageGen />
+          <ImageGen />
         </div>
       </div>
     </>
-
   );
 }
 
 export default Result;
-
-
-

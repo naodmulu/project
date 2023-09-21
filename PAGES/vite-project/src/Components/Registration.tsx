@@ -53,13 +53,13 @@ export default function MyPage() {
           alert("Registration successful!");
           navgate("/");
         }
-        alert(data.message || "Registration");
+        alert("Registration");
         
       })
       .catch((error) => {
         console.error("Error:", error);
         // print message to user from backend
-       alert(data.message || "An error occurred!");
+       alert("An error occurred!");
       });
   };
   

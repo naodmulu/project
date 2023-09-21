@@ -22,15 +22,7 @@ function HomePage() {
       <MNavbar username={username} speciality={speciality}  />
       <div className="text-black body_Center">
           <UploadFile />
-        <div className="items-center">
-          <button
-            id="upload_data"
-            onClick={gate}
-            className="btn hover:bg-blue-200 focus:ring-blue-800"
-          >
-            Upload
-          </button>
-        </div>
+        
       </div>
     </div>
   );

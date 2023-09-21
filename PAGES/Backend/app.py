@@ -87,20 +87,36 @@ class Upload(Resource):
         
         if not os.path.exists(UPLOAD_FOLDER):
             os.makedirs(UPLOAD_FOLDER)
-        # upload file
         parser = reqparse.RequestParser()
         parser.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
         args = parser.parse_args()
         file = args['file']
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        
-        return {'message': 'File uploaded successfully'}, 201
 
-       
+        if file:
+        # upload file
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            
+            # store file in database
+            video = Video(user_id=1, video_url=filename, video_information='test', date_created=123456789)
+            db.session.add(video)
+            db.session.commit()
+            
+            return {'message': 'File uploaded successfully'}, 201
+        else:
+            return {'message': 'File not found'}, 400
+        
+class VideoPlay(Resource):
+    def get (self,  video_url):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename=video_url)
     
     
-    
+class Image(Resource):
+    def get (self,  image_url):
+        return send_from_directory(app.config['UPLOAD_FOLDER'], filename=image_url)
+
+
+api.add_resource(VideoPlay, '/video/<video_url>')
 api.add_resource(Login, '/login')
 api.add_resource(Registration, '/register')
 api.add_resource(Upload, '/upload')
