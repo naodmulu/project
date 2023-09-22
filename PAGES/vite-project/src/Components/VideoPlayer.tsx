@@ -1,11 +1,33 @@
 import React, { useState, useRef } from "react";
 import { Container, Grid, Slider, Button, Paper } from "@mui/material";
+import { useEffect } from "react";
 
-function VideoPlayer({ videoUrls }) {
+function VideoPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRefs = [useRef(null), useRef(null)];
+  const [videoUrl, setVideoUrl] = useState('');
+  
 
+
+  const fetchVideo = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/video');
+      const blob = await response.blob();
+      setVideoUrl(URL.createObjectURL(blob));
+    } catch (error) {
+      console.error('Error fetching video:', error);
+    }
+  };
+
+  
+
+  // load video
+  useEffect(() => {
+    fetchVideo();
+  }, []);
+
+  const videoUrls = [videoUrl, videoUrl];
   // Handle play/pause for both videos
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);

@@ -5,6 +5,8 @@ from flask_cors import CORS
 import os
 import werkzeug
 from werkzeug.utils import secure_filename
+from flask import send_file
+
 
 app = Flask(__name__)
 CORS(app)
@@ -106,17 +108,20 @@ class Upload(Resource):
         else:
             return {'message': 'File not found'}, 400
         
-class VideoPlay(Resource):
-    def get (self,  video_url):
-        return send_from_directory(app.config['UPLOAD_FOLDER'], filename=video_url)
-    
-    
-class Image(Resource):
-    def get (self,  image_url):
-        return send_from_directory(app.config['UPLOAD_FOLDER'], filename=image_url)
 
 
-api.add_resource(VideoPlay, '/video/<video_url>')
+
+class VideoResource(Resource):
+    def get(self):
+        # Assuming you have a video file named video.mp4 in a folder named 'videos'
+        video_path = 'uploads/004_Introduction_to_this_section.mp4'
+        return send_file(video_path, mimetype='video/mp4')
+    
+    
+
+
+# Add the VideoResource to the API
+api.add_resource(VideoResource, '/video')
 api.add_resource(Login, '/login')
 api.add_resource(Registration, '/register')
 api.add_resource(Upload, '/upload')
