@@ -50,8 +50,13 @@ import React, { useState, useEffect } from "react";
 import MNavbar from "./MNavbar";
 import GeneratedText from "./GeneratedText";
 import VideoPlayer from "./VideoPlayer";
+<<<<<<< HEAD
+import React from "react";
+import ImageGen from "./ImageGen";
+=======
 import ImageGen from "./ImageGen";
 
+>>>>>>> effbf0a97987006817d380b5cafd8b759893d4f8
 function Result() {
 
   const [videoUrl, setVideoUrl] = useState("");
@@ -70,9 +75,15 @@ function Result() {
         <div className="flex">
           <VideoPlayer />
         </div>
+<<<<<<< HEAD
+        
+        <div className="items-center">
+         <ImageGen />
+=======
 
         <div className="items-center">
           <ImageGen />
+>>>>>>> effbf0a97987006817d380b5cafd8b759893d4f8
         </div>
       </div>
     </>
