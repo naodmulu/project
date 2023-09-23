@@ -214,7 +214,7 @@ const showUploadedFiles = () => (
   return (
     <div className="flex flex-col ">
       <FormLabel className="items-center upload rounded-lg mt-4 mb-4 shadow">
-        <div className=" items-center justify-center">
+        <div className=" flex justify-center">
           <Typography
           varient="h2"
           sx={{
