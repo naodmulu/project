@@ -85,6 +85,9 @@ class Login(Resource):
 # upload
 class Upload(Resource):
     
+    file = None
+    filename = ""
+    
     def post(self):
         
         if not os.path.exists(UPLOAD_FOLDER):
@@ -92,21 +95,27 @@ class Upload(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
         args = parser.parse_args()
-        file = args['file']
+        Upload.file = args['file']
 
-        if file:
+        if Upload.file:
         # upload file
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            Uplaod.filename = secure_filename(Upload.file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], Upload.filename))
             
             # store file in database
-            video = Video(user_id=1, video_url=filename, video_information='test', date_created=123456789)
+            video = Video(user_id=1, video_url=Uplaod.filename, video_information='test', date_created=123456789)
             db.session.add(video)
             db.session.commit()
             
             return {'message': 'File uploaded successfully'}, 201
         else:
             return {'message': 'File not found'}, 400
+        
+        
+    def get(self):
+        # Assuming you have a video file named video.mp4 in a folder named 'videos'
+        video_path = 'uploads/<Upload.filename>'
+        return send_file(video_path, mimetype='video/mp4')
         
 
 

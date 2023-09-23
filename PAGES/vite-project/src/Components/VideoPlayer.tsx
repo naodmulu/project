@@ -12,7 +12,7 @@ function VideoPlayer() {
 
   const fetchVideo = async () => {
     try {
-      const response = await fetch('http://localhost:5000/video');
+      const response = await fetch('http://localhost:5000/upload',{method: 'GET', mode: 'cors'});
       const blob = await response.blob();
       setVideoUrl(URL.createObjectURL(blob));
     } catch (error) {
