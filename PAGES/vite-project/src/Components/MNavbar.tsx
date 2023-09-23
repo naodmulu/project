@@ -19,10 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
-
-
 export const MNavbar = () => {
-
   let username = localStorage.getItem("username");
   let speciality = "Heart Specialist";
 
@@ -44,17 +41,17 @@ export const MNavbar = () => {
     fetch("http://127.0.0.1:5000/logout", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${localStorage.getItem('access_token')}`,
+        Authorization: `Bearer ${localStorage.getItem("access_token")}`,
       },
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log(data.message);
-      localStorage.removeItem('access_token');
-      localStorage.removeItem('username');
-      navigate("/");
-    })
-    .catch(error => console.error("Error:", error));
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.message);
+        localStorage.removeItem("access_token");
+        localStorage.removeItem("username");
+        navigate("/");
+      })
+      .catch((error) => console.error("Error:", error));
   };
   // username recieved from app.tsx
 
@@ -80,9 +77,7 @@ export const MNavbar = () => {
             aria-haspopup="true"
           >
             {/* <AccountCircleIcon /> */}
-            <Avatar sizes="large">
-              {username.charAt(0).toUpperCase()}
-            </Avatar>
+            <Avatar sizes="large">{username.charAt(0).toUpperCase()}</Avatar>
           </IconButton>
           <Menu
             id="profile-menu"
@@ -132,11 +127,8 @@ export const MNavbar = () => {
                 </span>
               </Box>
               <Box className="flex flex-col items-center mt-6">
-                <Button onClick={handleLogout}>
-                  
-                  Logout
-                </Button>
-                </Box>
+                <Button onClick={handleLogout}>Logout</Button>
+              </Box>
             </Box>
           </Menu>
         </Toolbar>

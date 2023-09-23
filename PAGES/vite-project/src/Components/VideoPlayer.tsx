@@ -6,22 +6,21 @@ function VideoPlayer() {
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRefs = [useRef(null), useRef(null)];
-  const [videoUrl, setVideoUrl] = useState('');
-  
+  const [videoUrl, setVideoUrl] = useState("");
+
   const fetchVideo = async () => {
     try {
-      const response = await fetch('http://localhost:5000/upload',{
-        method: 'GET',
+      const response = await fetch("http://localhost:5000/upload", {
+        method: "GET",
         headers: {
-            
-          "Authorization": `Bearer ${localStorage.getItem('access_token')}`, // Include token here
-  },
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`, // Include token here
+        },
       });
       const blob = await response.blob();
       setVideoUrl(URL.createObjectURL(blob));
       console.log("success");
     } catch (error) {
-      console.error('Error fetching video:', error);
+      console.error("Error fetching video:", error);
     }
   };
 
@@ -78,15 +77,25 @@ function VideoPlayer() {
                 src={url}
                 muted
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                onTimeUpdate={() => setCurrentTime(videoRefs[0].current.currentTime)}
+                onTimeUpdate={() =>
+                  setCurrentTime(videoRefs[0].current.currentTime)
+                }
                 onEnded={handleVideoEnd} // Call the handleVideoEnd function when the video ends
               />
             </Paper>
           </Grid>
         ))}
       </Grid>
-      <Grid container spacing={2} justifyContent="center" alignItems="center" display={"flex"} flexDirection={"column"} item>
-        <Grid item width={"100%"}  >
+      <Grid
+        container
+        spacing={2}
+        justifyContent="center"
+        alignItems="center"
+        display={"flex"}
+        flexDirection={"column"}
+        item
+      >
+        <Grid item width={"100%"}>
           <Slider
             value={currentTime}
             onChange={handleSeekChange}
@@ -97,8 +106,8 @@ function VideoPlayer() {
             valueLabelFormat={(value) => value.toFixed(1)}
           />
         </Grid>
-        <Grid width={"30%"} >
-          <Button variant="contained"  onClick={handlePlayPause} fullWidth>
+        <Grid width={"30%"}>
+          <Button variant="contained" onClick={handlePlayPause} fullWidth>
             {isPlaying ? "Pause" : "Play"}
           </Button>
         </Grid>
