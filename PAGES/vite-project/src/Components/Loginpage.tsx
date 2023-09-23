@@ -121,13 +121,13 @@ export const Loginpage = () => {
                   marginTop: "10px",
                 }}
                 onClick={handleSubmit}
-                className="link-btn3"
+                className="link-btn3 loginBTN"
                 ><b>Login</b></button>
                 
                 
                 <br></br>
-            <button onClick={gate} className="link-btn" ><b>singup</b></button>
-            <button className="link-btn2"><b>forget password?</b></button>
+            <button onClick={gate} className="link-btn loginBTN" ><b>SignUp</b></button>
+            <button className="link-btn2 loginBTN"><b>Forget Password?</b></button>
             </form>
             </section>
             </div>

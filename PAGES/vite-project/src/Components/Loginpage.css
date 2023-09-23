@@ -24,13 +24,13 @@
  
 
  
-  button {
+.loginBTN {
     border: black;
     background-color: rgb(31, 143, 235);
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
-    color: red;
+    color: white;
     padding: 10px;
     margin: 1rem 0;
     border-radius: 100px;
