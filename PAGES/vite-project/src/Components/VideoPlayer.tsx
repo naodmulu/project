@@ -8,19 +8,16 @@ function VideoPlayer() {
   const videoRefs = [useRef(null), useRef(null)];
   const [videoUrl, setVideoUrl] = useState('');
   
-
-
   const fetchVideo = async () => {
     try {
-      const response = await fetch('http://localhost:5000/upload',{method: 'GET', mode: 'cors'});
+      const response = await fetch('http://localhost:5000/upload');
       const blob = await response.blob();
       setVideoUrl(URL.createObjectURL(blob));
+      console.log("success");
     } catch (error) {
       console.error('Error fetching video:', error);
     }
   };
-
-  
 
   // load video
   useEffect(() => {
@@ -51,6 +48,16 @@ function VideoPlayer() {
     });
   };
 
+  // Handle video end (loop)
+  const handleVideoEnd = () => {
+    videoRefs.forEach((ref) => {
+      if (ref.current) {
+        ref.current.currentTime = 0;
+        ref.current.play();
+      }
+    });
+  };
+
   // Calculate the maximum duration based on the first video (assuming all videos have the same duration)
   const maxDuration = videoRefs[0].current?.duration || 0;
 
@@ -66,6 +73,7 @@ function VideoPlayer() {
                 muted
                 style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 onTimeUpdate={() => setCurrentTime(videoRefs[0].current.currentTime)}
+                onEnded={handleVideoEnd} // Call the handleVideoEnd function when the video ends
               />
             </Paper>
           </Grid>
@@ -74,7 +82,6 @@ function VideoPlayer() {
       <Grid container spacing={2} justifyContent="center" alignItems="center" display={"flex"} flexDirection={"column"} item>
         <Grid item width={"100%"}  >
           <Slider
-          
             value={currentTime}
             onChange={handleSeekChange}
             min={0}
