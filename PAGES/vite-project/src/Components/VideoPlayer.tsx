@@ -10,7 +10,13 @@ function VideoPlayer() {
   
   const fetchVideo = async () => {
     try {
-      const response = await fetch('http://localhost:5000/upload');
+      const response = await fetch('http://localhost:5000/upload',{
+        method: 'GET',
+        headers: {
+            
+          "Authorization": `Bearer ${localStorage.getItem('access_token')}`, // Include token here
+  },
+      });
       const blob = await response.blob();
       setVideoUrl(URL.createObjectURL(blob));
       console.log("success");

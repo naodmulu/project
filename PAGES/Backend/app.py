@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask_restful import Api, Resource, reqparse
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -6,10 +6,8 @@ import os
 import werkzeug
 from werkzeug.utils import secure_filename
 from flask import send_file
-from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity,get_jwt, jwt_required, jwt_manager
+from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, get_jwt, jwt_required, jwt_manager
 import datetime
-
-
 
 app = Flask(__name__)
 CORS(app)
@@ -20,9 +18,15 @@ db = SQLAlchemy(app)
 
 jwt = JWTManager(app)
 app.config['JWT_SECRET_KEY'] = '12345679'
+# secret key for session
+app.config['SESSION_TYPE'] = 'filesystem'
+app.config['SESSION_PERMANENT'] = False
+app.config['SECRET_KEY'] = 'my_secret_key'  # <-- Set your secret key here
 
 UPLOAD_FOLDER = os.path.basename('uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+blacklisted_tokens = set()
+
 
 
 class User(db.Model):
@@ -50,7 +54,7 @@ class Video(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     video_url = db.Column(db.String, nullable=False)
     video_information = db.Column(db.String)
-    date_created = db.Column(db.Integer)
+    date_created = db.Column(db.String)
 
 
 class Registration(Resource):
@@ -100,8 +104,6 @@ class Login(Resource):
 
 class Upload(Resource):
 
-    file = None
-    filename = ""
     
     @jwt_required()
     def post(self):
@@ -111,45 +113,56 @@ class Upload(Resource):
         parser.add_argument(
             'file', type=werkzeug.datastructures.FileStorage, location='files')
         args = parser.parse_args()
-        Upload.file = args['file']
+        file = args['file']
         current_user = get_jwt_identity()
 
-        if Upload.file:
-            # upload file
-            Upload.filename = secure_filename(Upload.file.filename)
-            Upload.file.save(os.path.join(
-                app.config['UPLOAD_FOLDER'], Upload.filename))
+        if file:
+            # upload file to the server
+            
+            filename = secure_filename(file.filename)
+            session['uploaded_filename'] = filename
+            Upload.filename = filename
+            file.save(os.path.join(
+                app.config['UPLOAD_FOLDER'], filename))
 
             # store file in database
             user = User.query.filter_by(username=current_user).first()
-            video = Video(user_id=user.id, video_url=Upload.filename,
-                        video_information='test', date_created=datetime.datetime.now())
+            video = Video(user_id=user.id, video_url=filename,
+                        video_information='test', date_created=datetime.datetime.now().strftime("%Y-%m-%d"))
             db.session.add(video)
             db.session.commit()
 
-            return {'message': f'uploads/{Upload.filename}'}, 201
+            return {'message': f'uploads/{filename}'}, 201
         else:
             return {'message': 'File not found'}, 400
 
 
     @jwt_required()
     def get(self):
+        
+        current_user = get_jwt_identity()
+        # from database videos table get the last entry row enterd by the user
+        user = User.query.filter_by(username= current_user).first()
+        video_url = Video.query.filter_by(user_id = user.id).order_by(Video.id.desc()).first().video_url
 
-        video_path = f'uploads/{Upload.filename}'
+                
+        
+        video_path = f'uploads/{video_url}'
+        print(video_path)
         return send_file(video_path, mimetype='video/mp4')
 
 
 class VideoResource(Resource):
     def get(self):
         # Assuming you have a video file named video.mp4 in a folder named 'videos'
-        video_path = 'uploads/004_Introduction_to_this_section.mp4'
+        video_path = f'uploads/{Upload.filename}'
         return send_file(video_path, mimetype='video/mp4')
     
 class logout(Resource):
     @jwt_required()
     def post(self):
         jti = get_jwt()['jti']
-        jwt_manager.add_to_blacklist(jti)
+        blacklisted_tokens.add(jti)
         return {'message': 'Successfully logged out'}, 200
         
 

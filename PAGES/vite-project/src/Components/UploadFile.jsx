@@ -74,7 +74,7 @@ const UploadFile = () => {
       fetch("http://127.0.0.1:5000/upload", {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            
             "Authorization": `Bearer ${localStorage.getItem('access_token')}`, // Include token here
     },
         body: formData,
