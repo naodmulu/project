@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import './Loginpage.css';
-import { FaUser, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { HiOutlineMail, HiUser, HiPhone, HiLockClosed } from "react-icons/hi";
 
