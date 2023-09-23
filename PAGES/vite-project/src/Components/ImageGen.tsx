@@ -16,9 +16,12 @@ function ImageGen() {
       <p className="text-black text-2xl mb-5 ml-5 font-bold">GeneralizeTitle</p>
       <Grid margin={"auto"}>
         <ul>
-            <li> <Discription img={image[0]} /> </li>
-            <li> <Discription img={image[1]} /> </li>
-            <li> <Discription img={image[2]} /> </li>
+            {/* map every image to discription */}
+          {image.map((image) => (
+            <li>
+              <Discription image={image} />
+            </li>
+          ))}
         </ul>
     </Grid>
 

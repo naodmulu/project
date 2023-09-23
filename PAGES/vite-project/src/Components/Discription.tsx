@@ -34,7 +34,7 @@ export const Discription = (props) => {
                 backgroundColor:"#22d3ee",
                 borderRadius:"15px",
                 padding:"8px 2px",}}
-           >{props.img}</Typography>
+           >{props.image}</Typography>
                 <Box height={"70%"} overflow={"auto"} padding={"10px"} marginTop={"15px"} >
                     <Typography sx={{padding:"0 15px 0 15px",position:"relative",}}>These conditions include coronary artery disease, heart failure, arrhythmias, and congenital heart defects. Symptoms of heart disease can vary depending on the specific condition, but may include chest pain or discomfort, shortness of breath, fatigue, and swelling in the legs or abdomen. Risk factors for heart disease include high blood pressure, high cholesterol, smoking, diabetes, obesity, and a family history of the condition. Treatment options for heart disease may include lifestyle changes, medications, and surgery. It is important to seek medical attention if you experience any symptoms of heart disease or have any concerns about your heart health.</Typography>
                 </Box>
