@@ -239,12 +239,13 @@ const showUploadedFiles = () => (
       </FormLabel>
       
       {/* <DataInput /> */}
-      <div>
+      {/* make div center */}
+      <div className="flex justify-center">
       <button
             id="upload_data"
             type='submit'
             htmlFor = "dropzone-file"
-            className="btn hover:bg-blue-200 focus:ring-blue-800"
+            className="btn  hover:bg-blue-200 focus:ring-blue-800"
             onClick={handleSubmission}
           >
             Upload

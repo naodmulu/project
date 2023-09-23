@@ -1,8 +1,6 @@
 import { useState } from "react";
 import "../App.css";
 import React from "react";
-
-
 import UploadFile from "./UploadFile";
 import DataInput from "./DataInput";
 import MNavbar from "./MNavbar";

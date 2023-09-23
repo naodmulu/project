@@ -29,8 +29,8 @@ body{
     /* button css */
     @apply hover:bg-cyan-500 text-center text-white bg-cyan-400 rounded-full text-lg px-1 py-2; 
     width: 180px;
-    margin: auto;
-    margin-left: 38%;
+    
+    
     border: 0.5px solid #d6d3d1;
     
     
@@ -50,7 +50,7 @@ min-width: 250px;
 
 .upload{
     position: relative;    
-    width: 40%;
+    width: 50%;
     min-height: 250px;
     height: 40%;
     min-width: 250px;
@@ -59,7 +59,7 @@ min-width: 250px;
     
     border: 1px solid #d6d3d1;
     background-color: whitesmoke;
-    margin-left: 10%;
+    margin-left: 25%;
     border-radius: 10% 10% ;
 }
 .updrop{
