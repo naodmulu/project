@@ -7,7 +7,7 @@ import MNavbar from "./MNavbar";
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {
-  let username = "User Name";
+  let username = localStorage.getItem("username");
   let speciality = "Heart Specialist";
 
   const navgate = useNavigate();

@@ -49,6 +49,8 @@ export const Loginpage = () => {
     })
     .then((data) => {
       console.log("Login successful", data);
+      localStorage.setItem('access_token', data.access_token); // Save the token
+      localStorage.setItem('username', formData.username); // Save the username
       gate2();
       // Redirect or perform other actions on successful login
     })

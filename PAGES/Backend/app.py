@@ -6,6 +6,8 @@ import os
 import werkzeug
 from werkzeug.utils import secure_filename
 from flask import send_file
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+import datetime
 
 
 app = Flask(__name__)
@@ -14,6 +16,9 @@ api = Api(app)
 # postgres sql uri
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://flaskuser:12344321@localhost:5432/flaskdb'
 db = SQLAlchemy(app)
+
+jwt = JWTManager(app)
+app.config['JWT_SECRET_KEY'] = '12345679'
 
 UPLOAD_FOLDER = os.path.basename('uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -84,9 +89,11 @@ class Login(Resource):
             email=args['username'], password=args['password']).first()
 
         if user or email:
-            return {'message': 'Login successful'}, 200
+            access_token = create_access_token(identity=args['username'])
+            return {'access_token': access_token}, 200
         else:
             return {'message': 'Invalid credentials'}, 401
+
 # upload
 
 
@@ -95,6 +102,7 @@ class Upload(Resource):
     file = None
     filename = ""
 
+    @jwt_required()
     def post(self):
 
         if not os.path.exists(UPLOAD_FOLDER):
@@ -104,6 +112,7 @@ class Upload(Resource):
             'file', type=werkzeug.datastructures.FileStorage, location='files')
         args = parser.parse_args()
         Upload.file = args['file']
+        current_user = get_jwt_identity()
 
         if Upload.file:
             # upload file
@@ -112,23 +121,21 @@ class Upload(Resource):
                 app.config['UPLOAD_FOLDER'], Upload.filename))
 
             # store file in database
+            user = User.query.filter_by(username=current_user).first()
             video = Video(user_id=1, video_url=Upload.filename,
-                          video_information='test', date_created=123456789)
+                          video_information='test', date_created=datetime.datetime.now())
             db.session.add(video)
             db.session.commit()
 
-            return {'message': f'uploads/{Upload.filename}'}, 201
+            return {'message': f'uploads/{User.query.filter_by(username=current_user).first()}'}, 201
         else:
             return {'message': 'File not found'}, 400
 
+    @jwt_required()
     def get(self):
-        # Assuming you have a video file named video.mp4 in a folder named 'videos'
-        # if file is in avi format, change mimetype='video/avi'
+
         video_path = f'uploads/{Upload.filename}'
-        if Upload.filename.split('.')[1] == 'avi':
-            return send_file(video_path, mimetype='video/avi')
-        else:
-            return send_file(video_path, mimetype='video/mp4')
+        return send_file(video_path, mimetype='video/mp4')
 
 
 class VideoResource(Resource):
