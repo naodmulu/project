@@ -81,7 +81,7 @@ const UploadFile = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
+          console.log(localStorage.getItem('access_token'));
           navgate("/result");
         })
         .catch((error) => {

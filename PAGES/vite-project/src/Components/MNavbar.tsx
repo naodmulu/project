@@ -19,7 +19,13 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 
-export const MNavbar = (props) => {
+
+
+export const MNavbar = () => {
+
+  let username = localStorage.getItem("username");
+  let speciality = "Heart Specialist";
+
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -34,6 +40,22 @@ export const MNavbar = (props) => {
     navigate("/home");
   };
 
+  const handleLogout = () => {
+    fetch("http://127.0.0.1:5000/logout", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${localStorage.getItem('access_token')}`,
+      },
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.message);
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('username');
+      navigate("/");
+    })
+    .catch(error => console.error("Error:", error));
+  };
   // username recieved from app.tsx
 
   return (
@@ -59,7 +81,7 @@ export const MNavbar = (props) => {
           >
             {/* <AccountCircleIcon /> */}
             <Avatar sizes="large">
-              {props.username.charAt(0).toUpperCase()}
+              {username.charAt(0).toUpperCase()}
             </Avatar>
           </IconButton>
           <Menu
@@ -79,7 +101,7 @@ export const MNavbar = (props) => {
                 p: 1,
               }}
             >
-              <Box className="flex flex-col items-center pb-10">
+              <Box className="flex flex-col items-center pb-10 mb-1">
                 <Box
                   sx={{
                     width: "100%",
@@ -89,7 +111,7 @@ export const MNavbar = (props) => {
                   }}
                 >
                   <Avatar sx={{ width: 36, height: 36, m: "auto" }}>
-                    {props.username.charAt(0).toUpperCase()}
+                    {username.charAt(0).toUpperCase()}
                   </Avatar>
                   <Button>Change Profile</Button>
                 </Box>
@@ -99,16 +121,22 @@ export const MNavbar = (props) => {
                     component="div"
                     className="mb-1 text-xl font-medium text-gray-900"
                   >
-                    {props.username}
+                    {username}
                   </Typography>
                   <IconButton size="small">
                     <EditIcon />
                   </IconButton>
                 </Box>
                 <span className="text-sm text-gray-500 dark:text-gray-400">
-                  {props.speciality}
+                  {speciality}
                 </span>
               </Box>
+              <Box className="flex flex-col items-center mt-6">
+                <Button onClick={handleLogout}>
+                  
+                  Logout
+                </Button>
+                </Box>
             </Box>
           </Menu>
         </Toolbar>

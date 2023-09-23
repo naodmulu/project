@@ -6,8 +6,9 @@ import os
 import werkzeug
 from werkzeug.utils import secure_filename
 from flask import send_file
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
+from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity,get_jwt, jwt_required, jwt_manager
 import datetime
+
 
 
 app = Flask(__name__)
@@ -101,10 +102,9 @@ class Upload(Resource):
 
     file = None
     filename = ""
-
+    
     @jwt_required()
     def post(self):
-
         if not os.path.exists(UPLOAD_FOLDER):
             os.makedirs(UPLOAD_FOLDER)
         parser = reqparse.RequestParser()
@@ -122,14 +122,15 @@ class Upload(Resource):
 
             # store file in database
             user = User.query.filter_by(username=current_user).first()
-            video = Video(user_id=1, video_url=Upload.filename,
-                          video_information='test', date_created=datetime.datetime.now())
+            video = Video(user_id=user.id, video_url=Upload.filename,
+                        video_information='test', date_created=datetime.datetime.now())
             db.session.add(video)
             db.session.commit()
 
-            return {'message': f'uploads/{User.query.filter_by(username=current_user).first()}'}, 201
+            return {'message': f'uploads/{Upload.filename}'}, 201
         else:
             return {'message': 'File not found'}, 400
+
 
     @jwt_required()
     def get(self):
@@ -143,6 +144,14 @@ class VideoResource(Resource):
         # Assuming you have a video file named video.mp4 in a folder named 'videos'
         video_path = 'uploads/004_Introduction_to_this_section.mp4'
         return send_file(video_path, mimetype='video/mp4')
+    
+class logout(Resource):
+    @jwt_required()
+    def post(self):
+        jti = get_jwt()['jti']
+        jwt_manager.add_to_blacklist(jti)
+        return {'message': 'Successfully logged out'}, 200
+        
 
 
 # Add the VideoResource to the API
@@ -150,6 +159,7 @@ api.add_resource(VideoResource, '/video')
 api.add_resource(Login, '/login')
 api.add_resource(Registration, '/register')
 api.add_resource(Upload, '/upload')
+api.add_resource(logout, '/logout')
 
 if __name__ == '__main__':
     app.run(debug=True)

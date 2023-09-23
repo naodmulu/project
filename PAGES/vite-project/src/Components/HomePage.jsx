@@ -7,8 +7,7 @@ import MNavbar from "./MNavbar";
 import { useNavigate } from "react-router-dom";
 
 function HomePage() {
-  let username = localStorage.getItem("username");
-  let speciality = "Heart Specialist";
+  
 
   const navgate = useNavigate();
   const gate = () => {
@@ -17,7 +16,7 @@ function HomePage() {
 
   return (
     <div>
-      <MNavbar username={username} speciality={speciality}  />
+      <MNavbar  />
       <div className="text-black body_Center">
           <UploadFile />
         
