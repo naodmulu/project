@@ -56,7 +56,7 @@ export const MNavbar = () => {
   // username recieved from app.tsx
 
   return (
-    <Box sx={{ mb: 20 }}>
+    <Box  sx={{ mb: 20 }}>
       <AppBar sx={{ backgroundColor: "#06b6d4", height: "80px" }}>
         <Toolbar sx={{ p: 1 }}>
           <IconButton edge="start" color="inherit" aria-label="menu">

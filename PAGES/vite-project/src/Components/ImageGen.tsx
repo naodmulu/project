@@ -16,9 +16,9 @@ function ImageGen() {
   
 
   return (
-    <div>
-      <MNavbar />
-      <p className="text-black text-2xl mb-5 ml-5 font-bold">GeneralizeTitle</p>
+    <div >
+      <p className="text-black text-2xl mb-5 ml-5 font-bold">Discription of Keynote Frames</p>
+      <p className="text-blue text-md mb-5 ml-5">frames: {length}</p>
       <Grid margin={"auto"}>
         <ul>
             <li>

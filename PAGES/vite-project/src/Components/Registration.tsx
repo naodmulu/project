@@ -65,30 +65,32 @@ export default function MyPage() {
   };
   
   return (
-    <div className="flex">
+    <div className="flex dark:bg-gray-900">
       <div
-        className="main"
+        
         style={{
-          background: "#1363DF",
+          background: "#075985",
           width: "65%",
-          height: "120vh",
+          height: "110vh",
           marginRight: 100,
+        
         }}
+        className="main dark:bg-gray-900"
       >
       </div>
       <div className="form">
-        <h1>Hello!</h1>
-        <h2>Sign Up to Get Started</h2>
+        <h1 className="block mb-2  text-gray-900 dark:text-white">Hello!</h1>
+        <h2 className="block mb-2  text-gray-900 dark:text-white">Sign Up to Get Started</h2>
 
         <form onSubmit={handleSubmit} className="">
           <label
             
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="block mt-3 mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             First Name
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5  pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3  pointer-events-none">
               <HiUser className = "icon" />
             </div>
             <input
@@ -97,7 +99,7 @@ export default function MyPage() {
               name="firstName"
               value={formData.firstName}
               onChange={handleChange}       
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="First Name"
               required
             />
@@ -109,7 +111,7 @@ export default function MyPage() {
             Last Name
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <HiUser className="icon" />
             </div>
             <input
@@ -119,7 +121,7 @@ export default function MyPage() {
               name="lastName"
               value={formData.lastName}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
             />
           </div>
@@ -129,7 +131,7 @@ export default function MyPage() {
             Username
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <HiUser className="icon" />
             </div>
             <input
@@ -139,7 +141,7 @@ export default function MyPage() {
               name="username"
               value={formData.username}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required            
             />
           </div>
@@ -150,7 +152,7 @@ export default function MyPage() {
             Your Email
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <HiOutlineMail className="icon" />
             </div>
             <input
@@ -160,7 +162,7 @@ export default function MyPage() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
             />
           </div>
@@ -171,7 +173,7 @@ export default function MyPage() {
             Phone Number
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <HiPhone className="icon" />
             </div>
             <input
@@ -181,7 +183,7 @@ export default function MyPage() {
               name="phone"
               value={formData.phone}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
             />
           </div>
@@ -191,7 +193,7 @@ export default function MyPage() {
             New Password
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <HiLockClosed className="icon" />
             </div>
             <input
@@ -201,7 +203,7 @@ export default function MyPage() {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               required
             />
           </div>
@@ -211,7 +213,7 @@ export default function MyPage() {
             Confirm Password
           </label>
           <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
+            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
               <HiLockClosed className="icon" />
             </div>
             <input
@@ -221,7 +223,7 @@ export default function MyPage() {
                 name="confirmPassword"
                 value={formData.confirmPassword}
                 onChange={handleChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-md rounded-full mb-3 mt-1  focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray dark:focus:ring-blue-500 dark:focus:border-blue-500"
               
                 required/>
           </div>
@@ -234,7 +236,7 @@ export default function MyPage() {
             />
             <label
               htmlFor="default-checkbox"
-              className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-600"
+              className="ml-2 mt-2 text-sm font-medium text-gray-900 dark:text-gray-500"
             >
               I agree to the terms and conditions that apply!
             </label>
@@ -248,7 +250,7 @@ export default function MyPage() {
               borderBlockColor: "white",
             }}
             type="submit"
-            className="py-2.5 px-5 mr-2 mb-2 text-lg font-large font-semibold font-Arial text-white-900 focus:outline-white bg-white rounded-lg border border-gray-100 hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-100 dark:bg-blue-100 dark:text-blue-100 dark:border-blue-100 dark:hover:text-white dark:hover:bg-gray-700"
+            className="py-2.5 px-5 mr-2 mb-2 text-lg font-large font-semibold font-Arial text-white-900 focus:outline-white bg-white rounded-lg border border-gray-100 hover:bg-blue-100 hover:text-white-700 focus:z-10 focus:ring-4 focus:ring-blue-100 dark:focus:ring-blue-100 dark:bg-blue-100 dark:text-blue-100  dark:hover:text-white dark:hover:bg-gray-700"
           >
             Register
           </button>

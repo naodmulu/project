@@ -182,7 +182,7 @@ const showUploadedFiles = () => (
       
       <label
         htmlFor="dropzone-file"
-        className="flex flex-col items-center justify-center w-full h-64 rounded-lg cursor-pointer bg-teal-50 hover:bg-[#000000]"
+        className="flex flex-col items-center justify-center w-full h-64 rounded-lg cursor-pointer bg-teal-50 hover:bg-[#000000] "
       >
         <div className="flex flex-col items-center justify-center pt-5 pb-6 updrop">
           <svg
@@ -216,8 +216,8 @@ const showUploadedFiles = () => (
   );
 
   return (
-    <div className="flex flex-col ">
-      <FormLabel className="items-center upload rounded-lg mt-4 mb-4 shadow">
+    <div className="flex flex-col  ">
+      <FormLabel className="items-center upload rounded-lg mt-4 mb-4 shadow ">
         <div className=" flex justify-center">
           <Typography
           varient="h2"

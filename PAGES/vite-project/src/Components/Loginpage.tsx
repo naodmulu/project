@@ -59,26 +59,26 @@ export const Loginpage = () => {
 
   return (
     <div className="App">
-      <div className="auth-form-container">
+      <div className="auth-form-container dark:bg-gray-800 ">
         <section className="form-container">
           <form
             action="/my-handling-form-page"
             method="post"
             className="Loginpage-form"
           >
-            <h2 className="text-black font-bold text-2xl flex justify-start ml-3">
+            <h2 className="text-black font-bold text-2xl flex justify-start ml-3 dark:text-white">
               Login Here
             </h2>
-            <h4 className="text-black text-md  flex justify-start ml-3">
+            <h4 className="text-black text-md  flex justify-start ml-3 dark:text-white">
               Welcome
             </h4>
             <br></br>
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 ml-6 flex text-sm font-medium text-gray-900 dark:text-white">
               Username
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                <HiUser className="icon" />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <HiUser  />
               </div>
               <input
                 type="text"
@@ -91,12 +91,12 @@ export const Loginpage = () => {
               />
             </div>
 
-            <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            <label className="block mb-2 ml-6 flex text-sm font-medium text-gray-900 dark:text-white">
               Password
             </label>
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none">
-                <HiLockClosed className="icon" />
+              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <HiLockClosed className="icon " />
               </div>
               <input
                 type="password"
@@ -116,7 +116,7 @@ export const Loginpage = () => {
                 width: "50%",
                 background: "#0bacc5",
                 borderBlockColor: "white",
-                marginTop: "10px",
+                marginTop: "20px",
               }}
               onClick={handleSubmit}
               className="link-btn3 loginBTN"
@@ -125,7 +125,7 @@ export const Loginpage = () => {
             </button>
 
             <br></br>
-            <button onClick={gate} className="link-btn loginBTN">
+            <button onClick={gate} className="link-btn loginBTN dark:text-white">
               <b>SignUp</b>
             </button>
             <button className="link-btn2 loginBTN">

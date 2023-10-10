@@ -8,7 +8,7 @@ import Registration from "./Components/Registration";
 import { Loginpage } from "./Components/Loginpage";
 function App() {
   return (
-    <div>
+    <div >
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/result" element={<Result />} />

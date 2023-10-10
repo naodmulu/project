@@ -59,10 +59,12 @@
   }
 
   
-  .auth-form-container{
-    background-color: (194, 199, 199);
-  }
   
+  
+  /* dark form of auth-form_container */
+  
+
+
   ::placeholder {
     font-family: 'Font Awesome Free', black; 
     font-size: 13px;
