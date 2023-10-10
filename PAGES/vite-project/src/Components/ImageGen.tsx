@@ -3,25 +3,38 @@ import "../App.css";
 import React from "react";
 import MNavbar from "./MNavbar";
 import { Discription } from "./Discription";
-import { Grid, Menu } from "@mui/material";
+import { Grid, Menu, Slider } from "@mui/material";
 
 function ImageGen() {
-  const username = "User";
-  const image = ["Image1", "Image2", "Image3"]
+ 
+  const image = ["Image1", "Image2", "Image3", "Image4", "Image5"]
+
+  // length of image array turn to integer
+  const length = parseInt(image.length);
+  const [slide , setSlide] = useState(1);
+
   
 
   return (
     <div>
-      <MNavbar username={username} />
+      <MNavbar />
       <p className="text-black text-2xl mb-5 ml-5 font-bold">GeneralizeTitle</p>
       <Grid margin={"auto"}>
         <ul>
-            {/* map every image to discription */}
-          {image.map((image) => (
             <li>
-              <Discription image={image} />
+              <Discription image={image[slide-1]} />
+              <Slider
+                  aria-label="Temperature"
+                  defaultValue={1}
+                  valueLabelDisplay="auto"
+                  step={1}
+                  marks
+                  min={1}
+                  max={length}
+                  onChange={(e) => setSlide(e.target.value)}
+                />
             </li>
-          ))}
+          
         </ul>
     </Grid>
 

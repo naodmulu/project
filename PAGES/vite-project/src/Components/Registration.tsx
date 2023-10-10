@@ -49,11 +49,12 @@ export default function MyPage() {
       .then((response) => response.json())
       .then((data) => {
         console.log("Registration successful!", data);
+        gate()
         if (data.status === 201) {
           alert("Registration successful!");
-          navgate("/");
+          gate();
         }
-        alert("Registration");
+        
         
       })
       .catch((error) => {

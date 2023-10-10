@@ -5,7 +5,7 @@ import image from "../image/ana.png"
 
 
 export const Discription = (props) => {
-    
+     
   return (
     <Container >
         <Box display={"flex"} 
