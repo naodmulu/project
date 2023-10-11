@@ -70,8 +70,10 @@ function Result() {
         <div className="flex">
           <VideoPlayer />
         </div>
-        
-        <div className="items-center">
+        <div className="items-center"
+        style={{
+          marginTop: "5%",
+        }}>
          <ImageGen />
         </div>
       </div>

@@ -6,6 +6,8 @@ import image from "../image/ana.png"
 
 export const Discription = (props) => {
      
+  // decode base64 to image
+
   return (
     <Container >
         <Box display={"flex"} 
@@ -18,7 +20,7 @@ export const Discription = (props) => {
                 position:"relative",
                 }}  >
             <Grid item xs={12} sm={6} width={"80%"} padding={"15px 0 15px 0"}>
-                <img className="h-full" src={image}  alt="random" />
+                <img className="h-full" src={props.image}  alt="random" />
             </Grid>
             <Grid item xs={12} sm={6} 
             sx={{backgroundColor:"whitesmoke",

@@ -1,17 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
 import React from "react";
 import MNavbar from "./MNavbar";
 import { Discription } from "./Discription";
 import { Grid, Menu, Slider } from "@mui/material";
+import axios from 'axios';
+import image from "../image/ana.png"
 
-function ImageGen() {
- 
-  const image = ["Image1", "Image2", "Image3", "Image4", "Image5"]
+const ImageGen = () => {
+
+  
+  const [imageUrl, setImageUrl] = useState([]);
+    
+  
+  const handleDownload = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/result', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}` 
+        }
+      });
+  
+      // Decode images and store in imageUrl state
+      const decodedImages = response.data.map(encodedImage => {
+        const decodedImage = atob(encodedImage); // Decode base64
+        return `data:image/png;base64,${decodedImage}`;
+      });
+  
+      setImageUrl(decodedImages);
+    } catch (error) {
+      console.error('Error fetching images:', error);
+    }
+  };
+  
+    
+  
+  //   return (
+  //     <div>
+  //       <h1>Download Images</h1>
+  //       <button onClick={handleDownload}>Fetch Images</button>
+  //       <div style={{ display: 'flex' }}>
+  //         {imageUrl.map((image, index) => (
+            
+  //           <img
+  //             key={index}
+  //             src={`data:image/png;base64,${image}`}
+  //             alt={`Image ${index}`}
+  //             style={{ width: '150px', height: '150px', margin: '10px' }}
+  //           />
+  //         ))}
+  //       </div>
+  //     </div>
+  //   );
+  // };
+
+
+  useEffect(() => {
+    handleDownload();
+  }, []);
+
 
   // length of image array turn to integer
-  const length = parseInt(image.length);
+  const length = parseInt(imageUrl.length);
   const [slide , setSlide] = useState(1);
+
 
   
 
@@ -22,7 +74,7 @@ function ImageGen() {
       <Grid margin={"auto"}>
         <ul>
             <li>
-              <Discription image={image[slide-1]} />
+              <Discription image={imageUrl} />
               <Slider
                   aria-label="Temperature"
                   defaultValue={1}

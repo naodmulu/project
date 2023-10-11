@@ -8,6 +8,9 @@ from werkzeug.utils import secure_filename
 from flask import send_file
 from flask_jwt_extended import JWTManager, create_access_token, get_jwt_identity, get_jwt, jwt_required, jwt_manager
 import datetime
+from AI_model import AI
+import base64
+from flask import Flask, jsonify
 
 app = Flask(__name__)
 CORS(app)
@@ -131,6 +134,8 @@ class Upload(Resource):
                         video_information='test', date_created=datetime.datetime.now().strftime("%Y-%m-%d"))
             db.session.add(video)
             db.session.commit()
+            
+            # delete frames folder if exists
 
             return {'message': f'uploads/{filename}'}, 201
         else:
@@ -157,7 +162,43 @@ class VideoResource(Resource):
         # Assuming you have a video file named video.mp4 in a folder named 'videos'
         video_path = f'uploads/{Upload.filename}'
         return send_file(video_path, mimetype='video/mp4')
-    
+
+class Result(Resource):
+    @jwt_required()
+    def get(self):
+        current_user = get_jwt_identity()
+        
+        # from database videos table get the last entry row enterd by the user
+        user = User.query.filter_by(username= current_user).first()
+        video_url = Video.query.filter_by(user_id = user.id).order_by(Video.id.desc()).first().video_url
+
+                
+        
+        video_path = f'uploads/{video_url}'
+        ai_instance = AI()
+        frame_path = ai_instance.frame(video_path)#frame path is a folder
+        
+        if frame_path is None:
+            return {'message': 'Failed to load frame'}, 400
+        
+        # create a list of frames path
+        frame_list = []
+        for i in os.listdir(frame_path):
+            frame_list.append(f"{frame_path}/{i}")
+        
+        print (frame_list)
+
+        images = []
+
+        for path in frame_list:
+            with open(path, 'rb') as image_file:
+                encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+                images.append(encoded_image)
+
+        return jsonify(images)
+
+ 
+        
 class logout(Resource):
     @jwt_required()
     def post(self):
@@ -173,6 +214,7 @@ api.add_resource(Login, '/login')
 api.add_resource(Registration, '/register')
 api.add_resource(Upload, '/upload')
 api.add_resource(logout, '/logout')
+api.add_resource(Result, '/result')
 
 if __name__ == '__main__':
     app.run(debug=True)
