@@ -58,6 +58,10 @@ class Video(db.Model):
     video_url = db.Column(db.String, nullable=False)
     video_information = db.Column(db.String)
     date_created = db.Column(db.String)
+    
+    
+
+    
 
 
 class Registration(Resource):

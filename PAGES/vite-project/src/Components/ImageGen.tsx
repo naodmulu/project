@@ -20,20 +20,11 @@ const ImageGen = () => {
           Authorization: `Bearer ${localStorage.getItem("access_token")}` 
         }
       });
-  
-      // Decode images and store in imageUrl state
-      const decodedImages = response.data.map(encodedImage => {
-        const decodedImage = atob(encodedImage); // Decode base64
-        return `data:image/png;base64,${decodedImage}`;
-      });
-  
-      setImageUrl(decodedImages);
+      setImageUrl(response.data);
     } catch (error) {
       console.error('Error fetching images:', error);
     }
   };
-  
-    
   
   //   return (
   //     <div>
@@ -62,7 +53,7 @@ const ImageGen = () => {
 
   // length of image array turn to integer
   const length = parseInt(imageUrl.length);
-  const [slide , setSlide] = useState(1);
+  
 
 
   
@@ -74,17 +65,7 @@ const ImageGen = () => {
       <Grid margin={"auto"}>
         <ul>
             <li>
-              <Discription image={imageUrl} />
-              <Slider
-                  aria-label="Temperature"
-                  defaultValue={1}
-                  valueLabelDisplay="auto"
-                  step={1}
-                  marks
-                  min={1}
-                  max={length}
-                  onChange={(e) => setSlide(e.target.value)}
-                />
+              <Discription image={imageUrl} len={length} />
             </li>
           
         </ul>
