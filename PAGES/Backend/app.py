@@ -30,6 +30,29 @@ UPLOAD_FOLDER = os.path.basename('uploads')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 blacklisted_tokens = set()
 
+class Frames(db.Model):
+    __tablename__ = 'frames'  # Define a common base table name
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    image_url = db.Column(db.String, nullable=False)
+    image_information = db.Column(db.String)
+    date_created = db.Column(db.String)
+
+    @staticmethod
+    def create_table(username):
+        # Define a method to create a new table for a specific user
+        table_name = f'{username}_frames'
+        if not db.engine.dialect.has_table(db.engine, table_name):
+            # Create the table only if it doesn't exist
+            dynamic_table = type(
+                table_name, (Frames,),
+                {'__tablename__': table_name}
+            )
+            dynamic_table.__table__.create(db.engine)
+
+        return table_name
+
 
 
 class User(db.Model):
@@ -59,9 +82,6 @@ class Video(db.Model):
     video_information = db.Column(db.String)
     date_created = db.Column(db.String)
     
-    
-
-    
 
 
 class Registration(Resource):
@@ -84,6 +104,11 @@ class Registration(Resource):
         user = User(**args)
         db.session.add(user)
         db.session.commit()
+
+        # create frame table each time a user register
+        Frames.create_table(args['username'])  
+        
+        
 
         return {'message': 'User registered successfully'}, 201
 
@@ -193,11 +218,25 @@ class Result(Resource):
         print (frame_list)
 
         images = []
+        frame_data = []
 
         for path in frame_list:
             with open(path, 'rb') as image_file:
+                discription = "test"
+                image_with_discription = {}
                 encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+                image_with_discription[encoded_image] = discription
+                frame_data.append(image_with_discription)
                 images.append(encoded_image)
+                
+        user = User.query.filter_by(username=current_user).first()
+        # table_name = f'{username}_frames'
+        # upload to database table named username_frames
+        table_name = f"{user.username}_frames"
+        frame =  Frame(table_name, user.id, images, frame_data, datetime.datetime.now().strftime("%Y-%m-%d"))
+        db.session.add(frame)
+        db.session.commit()
+
 
         return jsonify(images)
 

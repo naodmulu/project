@@ -52,6 +52,7 @@ class AI():
     
     def frame(self, video_path):
         
+        video_name = video_path[:-4]
         if os.path.exists('uploads/frames'):
             # delete frames folder if exists with it files
             for i in os.listdir('uploads/frames'):
@@ -68,7 +69,7 @@ class AI():
         
         # make dir name frame
         if not os.path.exists('uploads/frames'):
-            os.makedirs('uploads/frames')
+            os.makedirs(f'uploads/frames/{video_name}')
         
         # save every 10th frame
         num_frames = int(num_frames)
@@ -84,7 +85,7 @@ class AI():
             if i%10 == 0:
                 cv2.imwrite(f"uploads/frames/{i}.jpg", frame)
             
-        return f"uploads/frames"
+        return f"uploads/frames/{video_name}"
 
         
         
